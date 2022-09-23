@@ -2,6 +2,7 @@
 <html>
 <head>
   <script src="./main.js"></script>
+  <script src="./polyfill.min.js"></script>
 </head>
 <body>
   <h1>KWebBrew - Web-Based Homebrew System</h1>
@@ -16,5 +17,38 @@
   <input placeholder="enter path" id="textInput">
   <button onclick="getSource()">get source</button>
   <p id="sourcesource"></p>
+  <br />
+  <br />
+  <button onclick="getDirStuff()">CLICK TO DIR</button>
+  <p id="directory"></p>
+
+  <script>
+    function getDirStuff() {
+      try {
+        document.getElementById("directory").innerText = "running dir fetch";
+        fetchDirectory("./index.html", function (data) {
+          try {
+            document.getElementById("directory").innerText = "running reg";
+            var reg = new RegExp('<a(\n|.)*?>(\n|.)*?<\/a>', "g");
+            var anchorTags = Array.from(data.matchAll(reg));
+            document.getElementById("directory").innerText = "reg ran";
+            console.log(anchorTags);
+            document.getElementById("directory").innerText = JSON.stringify(anchorTags);
+
+            for (var i=0; i < anchorTags.length; i++) {
+              document.getElementById("directory").innerText = i;
+              var p = document.createElement("p");
+              p.innerText = anchorTags[i][0];
+              document.getElementById("directory").appendChild(p);
+            }
+          } catch (err) {
+            document.getElementById("directory").innerText = err.toString() + data;
+          }
+        });
+      } catch (err) {
+        document.getElementById("directory").innerText = err.toString();
+      }
+    }
+  </script>
 </body>
 </html>

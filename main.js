@@ -1,6 +1,6 @@
 function fetchData(url, callback) {
   // Create iframe
-  var iframe = document.createElement("iframe");
+  const iframe = document.createElement("iframe");
   iframe.src = url;
 
   // Add iframe to body
@@ -18,6 +18,16 @@ function fetchData(url, callback) {
     callback(iframeSource);
   });
 }
+
+function fetchDirectory(url, callback) {
+  document.getElementById("directory").innerText = "Executing fetchdir";
+  // Fetch Source
+  fetchData(url, function (data) {
+    callback(data);
+  });
+}
+
+
 
 // Button function to get source of file listings and such
 function getSource() {
