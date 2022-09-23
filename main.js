@@ -1,4 +1,4 @@
-function fetchData(url, ) {
+function fetchData(url, callback) {
   // Create iframe
   var iframe = document.createElement("iframe");
   iframe.src = url;
@@ -15,7 +15,7 @@ function fetchData(url, ) {
     document.body.removeChild(iframe);
 
     // Callback function
-    resolveresolve(iframeSource);
+    callback(iframeSource);
   });
 }
 
