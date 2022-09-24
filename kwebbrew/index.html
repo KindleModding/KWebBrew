@@ -94,28 +94,18 @@
       });
     }
 
-    // Repurposed Function
-    function getDirStuff() {
-      // Get directory info for apps
-      getDirectory("../apps/").then(function (data) {
-        // Generate the actual table given the list of app folders
-        generateTable(data);
-
-        //for (var i = 0; i < data.length; i++) {
-        //  const p = document.createElement("p");
-        //  p.innerText = data[i].name + " - " + data[i].path;
-
-        //  document.getElementById("directory").appendChild(p);
-        //}
-      });
-    }
-
     // The logging function
     function log(logStuff) {
       var p = document.createElement("p");
       p.innerText = logStuff.toString();
       document.getElementById("log").appendChild(p);
     }
+
+    // Get directory info for apps
+    getDirectory("../apps/").then(function (data) {
+      // Generate the actual table given the list of app folders
+      generateTable(data);
+    });
   </script>
 </body>
 </html>
