@@ -19,15 +19,6 @@ function fetchData(url, callback) {
   });
 }
 
-function fetchDirectory(url, callback) {
-  document.getElementById("directory").innerText = "Executing fetchdir";
-  // Fetch Source
-  fetchData(url, function (data) {
-    callback(data);
-  });
-}
-
-
 
 // Button function to get source of file listings and such
 function getSource() {

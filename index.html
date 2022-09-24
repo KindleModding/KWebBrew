@@ -24,30 +24,17 @@
 
   <script>
     function getDirStuff() {
-      try {
-        document.getElementById("directory").innerText = "running dir fetch";
-        fetchDirectory("./index.html", function (data) {
-          try {
-            document.getElementById("directory").innerText = "running reg";
-            var reg = new RegExp('<a(\n|.)*?>(\n|.)*?<\/a>', "g");
-            var anchorTags = Array.from(data.matchAll(reg));
-            document.getElementById("directory").innerText = "reg ran";
-            console.log(anchorTags);
-            document.getElementById("directory").innerText = JSON.stringify(anchorTags);
+      document.getElementById("directory").innerText = "running dir fetch";
+      fetchData("./index.html", function (data) {
+        document.getElementById("directory").innerText = "running reg";
+        var reg = new RegExp('<a(\n|.)*?>(\n|.)*?<\/a>', "g");
+        var anchorTags = Array.from(data.matchAll(reg));
 
-            for (var i=0; i < anchorTags.length; i++) {
-              document.getElementById("directory").innerText = i;
-              var p = document.createElement("p");
-              p.innerText = anchorTags[i][0];
-              document.getElementById("directory").appendChild(p);
-            }
-          } catch (err) {
-            document.getElementById("directory").innerText = err.toString() + data;
-          }
-        });
-      } catch (err) {
-        document.getElementById("directory").innerText = err.toString();
-      }
+        for (var i=0; i < anchorTags.length; i++) {
+          var p = document.createElement("p");
+          p.innerText = anchorTags[i][0];
+        }
+      });
     }
   </script>
 </body>
