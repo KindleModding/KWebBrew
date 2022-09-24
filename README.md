@@ -24,8 +24,8 @@ However, the browser does not support fetch or xmlhttprequests to get local file
 
 ## Limitations
 Note that whilst the polyfill works extremely well, there are some things that can't be replaced by a polyfill, for this reason the following features do not work:
-- Arrow Functions
-- Default Parameters
+- [Arrow Functions](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Default Parameters](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 
 If you find any unexpected behaviour, please open an issue
 
