@@ -4,8 +4,8 @@
 
 <html>
 <head>
-  <script src="file:///mnt/us/kwebbrew/polyfill.min.js"></script>
-  <script src="file:///mnt/us/kwebbrew/api.js"></script>
+  <script src="./polyfill.min.js"></script>
+  <script src="./api.js"></script>
   <script src="./main.js"></script>
 
   <link href="./main.css" rel="stylesheet">
@@ -15,61 +15,106 @@
 <body>
   <div class="title">
     <h1>KWebBrew - Web-Based Homebrew System</h1>
-  </div>  
+  </div>
+
+  <div id="log"></div>
+
+  <button onclick="getDirStuff()">LOAD APPS</button>
   
-  <table class="appTable">
-    <tr class="appRow">
-      <td class="app">
-        <a href="../apps/devtools/index.html">
-          <img src="../apps/devtools/icon.jpg">
-          <p>Devtools</p>
-        </a>
-      </td>
-      <td class="app">
-        <a href="../apps/devtools/index.html">
-          <img src="../apps/devtools/icon.jpg">
-          <p>Devtools</p>
-        </a>
-      </td>
-      <td class="app">
-        <a href="../apps/devtools/index.html">
-          <img src="../apps/devtools/icon.jpg">
-          <p>Devtools</p>
-        </a>
-      </td>
-    </tr>
-    <tr class="appRow">
-      <td class="app">
-        <a href="../apps/devtools/index.html">
-          <img src="../apps/devtools/icon.jpg">
-          <p>Devtools</p>
-        </a>
-      </td>
-      <td class="app">
-        <a href="../apps/devtools/index.html">
-          <img src="../apps/devtools/icon.jpg">
-          <p>Devtools</p>
-        </a>
-      </td>
-      <td class="app">
-        <a href="../apps/devtools/index.html">
-          <img src="../apps/devtools/icon.jpg">
-          <p>Devtools</p>
-        </a>
-      </td>
-    </tr>
+  <table id="appTable" class="appTable">
   </table>
 
   <script>
-    function getDirStuff() {
-      getDirectory("file:///mnt/us/apps/").then(function (data) {
-        for (var i = 0; i < data.length; i++) {
-          const p = document.createElement("p");
-          p.innerText = data[i].name + " - " + data[i].path;
+    function generateTable(appList) {
+      log("Apps:");
+      log(JSON.stringify(appList));
 
-          document.getElementById("directory").appendChild(p);
+      // Create list for app manifest fetching
+      var appManifestPromises = [];
+
+      for (var i = 0; i < appList.length; i++) {
+        log(appList[i].path + "manifest.js");
+        // Add app manifest promise to list
+        appManifestPromises.push(fetchData(appList[i].path + "/manifest.js"));
+      }
+
+      // Execute all promises
+      Promise.all(appManifestPromises).then(function (appManifests) {
+        log("Obtained manifests");
+        log(JSON.stringify(appManifests));
+
+        // Loop through app manifests
+        for (var i = 0; i < appManifests.length; i++) {
+          if (i % 3 == 0 && i != 0) {
+            // If it is the end of a row, add it to the body and make a new row
+            document.getElementById("appTable").appendChild(tableRow);
+            var tableRow = document.createElement("tr");
+            tableRow.class = "appRow";
+          } else if (i == 0) {
+            // If it is the first row, create a new row without adding the (non-existent) previous row to the body
+            var tableRow = document.createElement("tr");
+            tableRow.classList.add("appRow");
+          }
+
+          // Try/Catch for malformed manifests
+          try {
+            // Parse manifest file
+            var appData = JSON.parse(appManifests[i]);
+
+            // Create table cell
+            const appCell = document.createElement("td");
+            appCell.classList.add("app");
+
+            // Create app link (cross-reference path from the appList since the manifest doesn't contain it)
+            const appAnchor = document.createElement("a");
+            appAnchor.href = appList[i].path;
+
+            // Create app icon element
+            const appImage = document.createElement("img");
+            appImage.src = "../apps/devtools/icon.jpg";
+
+            // Create app title element
+            const appName = document.createElement("p");
+            appName.innerText = appData.name;
+
+            // Add all the elements together
+            appAnchor.appendChild(appImage);
+            appAnchor.appendChild(appName);
+            appCell.appendChild(appAnchor);
+            tableRow.appendChild(appCell);
+          }
+          catch (error) {
+            // Send error to log
+            log("APP ERROR [" + appList[i].name + "]" + error.toString());
+          }
         }
+
+        // Add the last row to the table
+        document.getElementById("appTable").appendChild(tableRow);
       });
+    }
+
+    // Repurposed Function
+    function getDirStuff() {
+      // Get directory info for apps
+      getDirectory("../apps/").then(function (data) {
+        // Generate the actual table given the list of app folders
+        generateTable(data);
+
+        //for (var i = 0; i < data.length; i++) {
+        //  const p = document.createElement("p");
+        //  p.innerText = data[i].name + " - " + data[i].path;
+
+        //  document.getElementById("directory").appendChild(p);
+        //}
+      });
+    }
+
+    // The logging function
+    function log(logStuff) {
+      var p = document.createElement("p");
+      p.innerText = logStuff.toString();
+      document.getElementById("log").appendChild(p);
     }
   </script>
 </body>
