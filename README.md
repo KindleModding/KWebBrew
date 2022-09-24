@@ -4,11 +4,11 @@
 Kindle Web-Based HomeBrew Launcher
 
 ## What Is It?
-The KWebBrew Launcher (Kindle Web-Based HomeBrew Launcher) allows people to code custom HTML webapps which are then stored locally on the Kindle itself, without the need for an internet connection!
+The KWebBrew Launcher (Kindle Web-Based HomeBrew Launcher) allows people to code custom HTML webapps which are then stored locally on the Kindle itself, without the need for an internet connection or jailbreak!
 <br/>
-The KWebBrew Launcher acts as a launcher which automatically scans for apps, and then allows you to launch them
+The KWebBrew Launcher acts as a launcher which automatically scans for apps, and then allows you to launch them with ease
 <br/>
-The KWebBrew Launcher also comes with a few applications of its own, such as a read-only file manager 
+The KWebBrew Launcher also comes with a few applications of its own, such as a read-only file manager (write filesystem access requires jailbreak, which is not the point of KWebBrew
 <br/>
 Lastly, the KWebBrew Launcher also comes with an API which other applications can use to read local files/directories 
 
