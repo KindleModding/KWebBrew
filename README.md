@@ -22,6 +22,12 @@ In fact, the browser itself can even bookmark these files for quick access.
 <br/>
 However, the browser does not support fetch or xmlhttprequests to get local files, luckily, I found a workaround by using iframes and getting their source. Additionally, the use of a polyfill allows apps using the KWebBrew API to use ES6 syntax in their apps, while the browser normally wouldn't support it
 
+## Limitations
+Note that whilst the polyfill works extremely well, there are some things that can't be replaced by a polyfill, for this reason the following features do not work:
+- Arrow Functions
+
+If you find any unexpected behaviour, please open an issue
+
 ## Credits
 Using custom polyfill from: [polyfill.io](https://polyfill.io) - MIT
 <br/>
