@@ -25,6 +25,4 @@ However, the browser does not support fetch or xmlhttprequests to get local file
 ## Credits
 Using custom polyfill from: [polyfill.io](https://polyfill.io) - MIT
 <br/>
-Polyfill cache method from: [this issue](https://github.com/Financial-Times/polyfill-service/issues/2702)
-<br/>
 "Exploit" Discovery: [mobileread forums](https://www.mobileread.com/forums/showthread.php?t=45969) also [here](https://www.mobileread.com/forums/showthread.php?t=24127)
