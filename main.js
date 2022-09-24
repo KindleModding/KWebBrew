@@ -11,13 +11,18 @@ function fetchData(url) {
     // Add iframe to body
     document.body.appendChild(iframe);
 
+    // Timeout To Remove iframe
+    setTimeout(function () {
+      iframe.remove();
+    }, 2000);
+
     // Add listener to iframe
     iframe.addEventListener("load", function (event) {
       // Get iframe's documentElement and clone it and get the innerHTML
       iframeSource = (event.target.contentDocument.documentElement || event.target.contentWindow.document.documentElement).cloneNode(true).innerHTML;
 
       // Remove iframe from DOM
-      document.body.removeChild(event.target);
+      event.target.remove();
 
       // Resolve promise
       callback(iframeSource);
