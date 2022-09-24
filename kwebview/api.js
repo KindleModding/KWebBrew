@@ -1,6 +1,8 @@
-addEventListener("error", function (event) {
-  document.body.innerText = event.message + "\nAt: " + event.lineno + ":" + event.colno + "\nIn: " + event.filename;
-});
+//===============================//
+//                               //
+// Copyright Bluebotlaboratories //
+//                               //
+//===============================//
 
 function fetchData(url, timeout) {
   return new Promise(function (callback) {
@@ -15,7 +17,7 @@ function fetchData(url, timeout) {
     if (timeout !== -1) {
       setTimeout(function () {
         iframe.remove();
-      }, timeout||2000);
+      }, timeout || 2000);
     }
 
     // Add listener to iframe
@@ -48,7 +50,7 @@ function getDirectory(location) {
       // Get anchor tags (without closing tag)
       const anchorTags = Array.from(data.matchAll(tagReg));
 
-      for (var i=0; i < anchorTags.length; i++) {
+      for (var i = 0; i < anchorTags.length; i++) {
         // Get href source (URL)
         const source = Array.from(anchorTags[i][0].matchAll(hrefReg));
 
@@ -61,14 +63,4 @@ function getDirectory(location) {
       callback(files); // Resolve promise
     });
   });
-}
-
-
-// Button function to get source of file listings and such
-function getSource() {
-  // Get the source displaying element
-  const sourcer = document.getElementById("sourcesource");
-
-  // Fetch data with source callback
-  fetchData(document.getElementById("textInput").value).then(function (text) { sourcer.innerText = text; });
 }

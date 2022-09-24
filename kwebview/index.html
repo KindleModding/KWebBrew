@@ -1,7 +1,11 @@
 <!DOCTYPE HTML>
+
+<!-- Copyright Bluebotlaboratories -->
+
 <html>
 <head>
-  <script src="./polyfill.min.js"></script>
+  <script src="file:///mnt/us/kwebbrew/polyfill.min.js"></script>
+  <script src="file:///mnt/us/kwebbrew/api.js"></script>
   <script src="./main.js"></script>
   <title>KWEBBREW LAUNCHER</title>
 </head>
@@ -25,8 +29,8 @@
 
   <script>
     function getDirStuff() {
-      getDirectory("../").then(function (data) {
-        for (var i=0; i < data.length; i++) {
+      getDirectory("file:///mnt/us/apps/").then(function (data) {
+        for (var i = 0; i < data.length; i++) {
           const p = document.createElement("p");
           p.innerText = data[i].name + " - " + data[i].path;
 
