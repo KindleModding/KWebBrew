@@ -19,7 +19,7 @@ function fetchData(url) {
       // Remove iframe from DOM
       document.body.removeChild(event.target);
 
-      // Callback function
+      // Resolve promise
       callback(iframeSource);
     });
   });
@@ -28,25 +28,30 @@ function fetchData(url) {
 
 function getDirectory(location) {
   return new Promise(function (callback) {
+    // Get source of directory listing
     fetchData(location).then(function (data) {
+      // Create list
       var files = [];
 
+      // Define regex for extracting different things
       const tagReg = new RegExp('<a(\n|.)*?(?=<\/a>)', "gim");
       const hrefReg = new RegExp('href="(\n|.)*?(?=")', 'gim');
       const tagRemovalReg = new RegExp('<a(\n|.)*?>', 'gim');
 
+      // Get anchor tags (without closing tag)
       const anchorTags = Array.from(data.matchAll(tagReg));
 
       for (var i=0; i < anchorTags.length; i++) {
+        // Get href source (URL)
         const source = Array.from(anchorTags[i][0].matchAll(hrefReg));
 
         files.push({
-          "name": anchorTags[i][0].replace(tagRemovalReg, '').toString(),
-          "path": source[0][0].substring(6).toString()
+          "name": anchorTags[i][0].replace(tagRemovalReg, ''), // Remove anchor tags from match to get only their innerText
+          "path": source[0][0].substring(6) // Remove the href=" part of the href source
         });
       }
 
-      callback(files);
+      callback(files); // Resolve promise
     });
   });
 }

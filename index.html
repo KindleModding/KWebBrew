@@ -26,7 +26,6 @@
     function getDirStuff() {
       getDirectory("../").then(function (data) {
         for (var i=0; i < data.length; i++) {
-
           const p = document.createElement("p");
           p.innerText = data[i].name + " - " + data[i].path;
 
