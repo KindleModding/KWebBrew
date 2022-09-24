@@ -67,11 +67,11 @@
 
             // Create app link (cross-reference path from the appList since the manifest doesn't contain it)
             const appAnchor = document.createElement("a");
-            appAnchor.href = appList[i].path;
+            appAnchor.href = appList[i].path + "/" + appData.entrypoint;
 
             // Create app icon element
             const appImage = document.createElement("img");
-            appImage.src = "../apps/devtools/icon.jpg";
+            appImage.src = appList[i].path + "/" + appData.icon;
 
             // Create app title element
             const appName = document.createElement("p");
