@@ -1,0 +1,32 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.title {
+  text-align: center;
+}
+
+.appTable {
+  table-layout: fixed;
+  border-collapse: separate;
+}
+
+.appRow {
+  width: 100%;
+}
+
+.app {
+  padding: 1.5%;
+  width: 30%;
+  text-align: center;
+}
+
+.app img {
+  object-fit: contain;
+  width: 100%;
+  border-radius: 5%;
+}

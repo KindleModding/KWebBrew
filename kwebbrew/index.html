@@ -7,25 +7,58 @@
   <script src="file:///mnt/us/kwebbrew/polyfill.min.js"></script>
   <script src="file:///mnt/us/kwebbrew/api.js"></script>
   <script src="./main.js"></script>
+
+  <link href="./main.css" rel="stylesheet">
+
   <title>KWEBBREW LAUNCHER</title>
 </head>
 <body>
-  <h1>KWebBrew - Web-Based Homebrew System</h1>
-  <a href="file:///mnt/us/kwebbrew/index.html">Open This Document</a>
-  <br />
-  <a href="file:////">Open Root Directory</a>
-  <br />
-  <p>Local Link:</p>
-  <img src="./test.png">
-
-  <p>Iframe Source:</p>
-  <input placeholder="enter path" id="textInput">
-  <button onclick="getSource()">get source</button>
-  <p id="sourcesource"></p>
-  <br />
-  <br />
-  <button onclick="getDirStuff()">CLICK TO DIR</button>
-  <p id="directory"></p>
+  <div class="title">
+    <h1>KWebBrew - Web-Based Homebrew System</h1>
+  </div>  
+  
+  <table class="appTable">
+    <tr class="appRow">
+      <td class="app">
+        <a href="../apps/devtools/index.html">
+          <img src="../apps/devtools/icon.jpg">
+          <p>Devtools</p>
+        </a>
+      </td>
+      <td class="app">
+        <a href="../apps/devtools/index.html">
+          <img src="../apps/devtools/icon.jpg">
+          <p>Devtools</p>
+        </a>
+      </td>
+      <td class="app">
+        <a href="../apps/devtools/index.html">
+          <img src="../apps/devtools/icon.jpg">
+          <p>Devtools</p>
+        </a>
+      </td>
+    </tr>
+    <tr class="appRow">
+      <td class="app">
+        <a href="../apps/devtools/index.html">
+          <img src="../apps/devtools/icon.jpg">
+          <p>Devtools</p>
+        </a>
+      </td>
+      <td class="app">
+        <a href="../apps/devtools/index.html">
+          <img src="../apps/devtools/icon.jpg">
+          <p>Devtools</p>
+        </a>
+      </td>
+      <td class="app">
+        <a href="../apps/devtools/index.html">
+          <img src="../apps/devtools/icon.jpg">
+          <p>Devtools</p>
+        </a>
+      </td>
+    </tr>
+  </table>
 
   <script>
     function getDirStuff() {

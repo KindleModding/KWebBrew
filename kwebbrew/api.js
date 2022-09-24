@@ -3,6 +3,7 @@
 // Copyright Bluebotlaboratories //
 //                               //
 //===============================//
+var kindle = window.kindle || top.kindle;
 
 function fetchData(url, timeout) {
   return new Promise(function (callback) {
@@ -29,7 +30,7 @@ function fetchData(url, timeout) {
       event.target.remove();
 
       // Resolve promise
-      callback(iframeSource);
+      callback(iframeSource.replace('<head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">', '').replace('</pre></body>', ''));
     });
   });
 }
