@@ -2,7 +2,7 @@ addEventListener("error", function (event) {
   document.body.innerText = event.message + "\nAt: " + event.lineno + ":" + event.colno + "\nIn: " + event.filename;
 });
 
-function fetchData(url) {
+function fetchData(url, timeout) {
   return new Promise(function (callback) {
     // Create iframe
     const iframe = document.createElement("iframe");
@@ -14,7 +14,7 @@ function fetchData(url) {
     // Timeout To Remove iframe
     setTimeout(function () {
       iframe.remove();
-    }, 2000);
+    }, timeout||2000);
 
     // Add listener to iframe
     iframe.addEventListener("load", function (event) {
