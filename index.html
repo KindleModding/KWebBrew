@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <script src="./main.js"></script>
   <script src="./polyfill.min.js"></script>
+  <script src="./main.js"></script>
 </head>
 <body>
   <h1>KWebBrew - Web-Based Homebrew System</h1>
@@ -24,18 +24,11 @@
 
   <script>
     function getDirStuff() {
-      fetchData("../").then(function (data) {
-        const tagReg = new RegExp('<a(\n|.)*?(?=<\/a>)', "gim");
-        const hrefReg = new RegExp('href="(\n|.)*?(?=")', 'gim');
-        const tagRemovalReg = new RegExp('<a(\n|.)*?>', 'gim');
-
-        const anchorTags = Array.from(data.matchAll(tagReg));
-
-        for (var i=0; i < anchorTags.length; i++) {
-          const source = Array.from(anchorTags[i][0].matchAll(hrefReg));
+      getDirectory("../").then(function (data) {
+        for (var i=0; i < data.length; i++) {
 
           const p = document.createElement("p");
-          p.innerText = anchorTags[i][0].replace(tagRemovalReg, '') + " - " + source[0][0].substring(6);
+          p.innerText = data[i].name + " - " + data[i].path;
 
           document.getElementById("directory").appendChild(p);
         }
