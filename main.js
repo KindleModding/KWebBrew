@@ -1,21 +1,27 @@
-function fetchData(url, callback) {
-  // Create iframe
-  const iframe = document.createElement("iframe");
-  iframe.src = url;
+addEventListener("error", function (event) {
+  document.body.innerText = event.message + "\nAt: " + event.lineno + ":" + event.colno + "\nIn: " + event.filename;
+});
 
-  // Add iframe to body
-  document.body.appendChild(iframe);
+function fetchData(url) {
+  return new Promise(function (callback) {
+    // Create iframe
+    const iframe = document.createElement("iframe");
+    iframe.src = url;
 
-  // Add listener to iframe
-  iframe.addEventListener("load", function (event) {
-    // Get iframe's documentElement and clone it and get the innerHTML
-    iframeSource = (iframe.contentDocument.documentElement || iframe.contentWindow.document.documentElement).cloneNode(true).innerHTML;
+    // Add iframe to body
+    document.body.appendChild(iframe);
 
-    // Remove iframe from DOM
-    document.body.removeChild(iframe);
+    // Add listener to iframe
+    iframe.addEventListener("load", function (event) {
+      // Get iframe's documentElement and clone it and get the innerHTML
+      iframeSource = (event.target.contentDocument.documentElement || event.target.contentWindow.document.documentElement).cloneNode(true).innerHTML;
 
-    // Callback function
-    callback(iframeSource);
+      // Remove iframe from DOM
+      document.body.removeChild(event.target);
+
+      // Callback function
+      callback(iframeSource);
+    });
   });
 }
 
@@ -23,8 +29,8 @@ function fetchData(url, callback) {
 // Button function to get source of file listings and such
 function getSource() {
   // Get the source displaying element
-  var sourcer = document.getElementById("sourcesource");
+  const sourcer = document.getElementById("sourcesource");
 
   // Fetch data with source callback
-  fetchData(document.getElementById("textInput").value, function (text) { sourcer.innerText = text; });
+  fetchData(document.getElementById("textInput").value).then(function (text) { sourcer.innerText = text; });
 }

@@ -24,15 +24,20 @@
 
   <script>
     function getDirStuff() {
-      document.getElementById("directory").innerText = "running dir fetch";
-      fetchData("./index.html", function (data) {
-        document.getElementById("directory").innerText = "running reg";
-        var reg = new RegExp('<a(\n|.)*?>(\n|.)*?<\/a>', "g");
-        var anchorTags = Array.from(data.matchAll(reg));
+      fetchData("../").then(function (data) {
+        const tagReg = new RegExp('<a(\n|.)*?(?=<\/a>)', "gim");
+        const hrefReg = new RegExp('href="(\n|.)*?(?=")', 'gim');
+        const tagRemovalReg = new RegExp('<a(\n|.)*?>', 'gim');
+
+        const anchorTags = Array.from(data.matchAll(tagReg));
 
         for (var i=0; i < anchorTags.length; i++) {
-          var p = document.createElement("p");
-          p.innerText = anchorTags[i][0];
+          const source = Array.from(anchorTags[i][0].matchAll(hrefReg));
+
+          const p = document.createElement("p");
+          p.innerText = anchorTags[i][0].replace(tagRemovalReg, '') + " - " + source[0][0].substring(6);
+
+          document.getElementById("directory").appendChild(p);
         }
       });
     }
