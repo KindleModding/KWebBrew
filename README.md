@@ -10,7 +10,7 @@ The KWebBrew Launcher acts as a launcher which automatically scans for apps, and
 <br/>
 The KWebBrew Launcher also comes with a few applications of its own, such as a read-only file manager (write filesystem access requires jailbreak, which is not the point of KWebBrew
 <br/>
-Lastly, the KWebBrew Launcher also comes with an API which other applications can use to read local files/directories 
+Lastly, the KWebBrew Launcher also comes with an API which other applications can use to read local files/directories as well as a polyfill including most standard ES6 features (see [Limitations](https://github.com/Bluebotlaboratories/KWebBrew/#Limitations))
 
 ## Installation
 Coming Soon!
