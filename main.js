@@ -12,9 +12,11 @@ function fetchData(url, timeout) {
     document.body.appendChild(iframe);
 
     // Timeout To Remove iframe
-    setTimeout(function () {
-      iframe.remove();
-    }, timeout||2000);
+    if (timeout !== -1) {
+      setTimeout(function () {
+        iframe.remove();
+      }, timeout||2000);
+    }
 
     // Add listener to iframe
     iframe.addEventListener("load", function (event) {
