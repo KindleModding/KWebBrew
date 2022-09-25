@@ -1,8 +1,8 @@
 {
-  "name": "devtools",
+  "name": "File Browser",
   "author": "Bluebotlaboratories",
+  "description": "Simple Read-Only File Browser For Kindles",
+  "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
   "icon": "icon.jpg",
-  "description": "Debug and Developer Tools For kwebdev",
-  "repo": null,
   "entrypoint": "index.html"
 }

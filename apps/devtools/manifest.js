@@ -1,8 +1,8 @@
 {
   "name": "devtools",
   "author": "Bluebotlaboratories",
+  "description": "Javascript Debug and Developer Tools For kwebdev",
+  "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
   "icon": "icon.jpg",
-  "description": "Debug and Developer Tools For kwebdev",
-  "repo": null,
   "entrypoint": "index.html"
 }

@@ -5,50 +5,22 @@
 <html>
 <head>
   <meta name="viewport" content="user-scalable=no"/>
-  <script>
-    if(!kindle || typeof kindle === 'undefined') {
-      var kindle = window.kindle || top.kindle;
-    }
-  </script>
   <script src="file:///mnt/us/kwebbrew/polyfill.min.js"></script>
   <script src="file:///mnt/us/kwebbrew/api.js"></script>
   <script src="./main.js"></script>
-  <title>KWEBBREW LAUNCHER</title>
+
+  <link href="./main.css" rel="stylesheet">
+
+  <title>KWEBBREW FILE BROWSER</title>
 </head>
 <body>
-  <h1>DEVTOOLS</h1>
-  <div id="log"></div>
-
-  <button onclick="getType();">Get Type</button>
-
-  <p>Change Sensitivity:</p>
-  <input id="sense" type="number">
-  <button onclick="changeSensitivity()">DO</button>
+  <h1>KWEBBREW FILE BROWSER</h1>
+  
   
   <script>
-    log(typeof(window.kindle));
-    //for (prop in window) {
-    //  log(prop);
-    //}
-
-    function getType() {
-      if(!kindle || typeof kindle === 'undefined') {
-        var kindle = window.kindle || top.kindle;
-        log("Reloaded Thing:");
-        log(typeof(kindle));
-      }
-    }
-
-    log (kindle.dev.setSensitivity.toString());
-
     function log(logStuff) {
-      var p = document.createElement("p");
-      p.innerText = logStuff.toString();
-      document.getElementById("log").appendChild(p);
-    }
-
-    function changeSensitivity() {
-      kindle.dev.setSensitivity(true, document.getElementById("sense"))
+      document.getElementById("log").innerHTML += "\n" + logStuff.toString();
+      document.getElementById("log").scrollTop = document.getElementById("log").scrollHeight;
     }
   </script>
 </body>
