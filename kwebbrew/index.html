@@ -4,6 +4,7 @@
 
 <html>
 <head>
+  <meta name="viewport" content="user-scalable=no"/>
   <script src="./polyfill.min.js"></script>
   <script src="./api.js"></script>
   <script src="./main.js"></script>
@@ -17,9 +18,9 @@
     <h1>KWebBrew - Web-Based Homebrew System</h1>
   </div>
 
-  <div id="log"></div>
+  <div id="log" style="display: none;"></div>
 
-  <button onclick="getDirStuff()">LOAD APPS</button>
+  <button onclick="toggleLog()">TOGGLE LOG</button>
   
   <table id="appTable" class="appTable">
   </table>
@@ -99,6 +100,16 @@
       var p = document.createElement("p");
       p.innerText = logStuff.toString();
       document.getElementById("log").appendChild(p);
+    }
+
+    function toggleLog() {
+      const logElement = document.getElementById("log");
+
+      if (logElement.style.getPropertyValue("display") == "none") {
+        document.getElementById("log").style.setProperty("display", "block");
+      } else {
+        document.getElementById("log").style.setProperty("display", "none");
+      }
     }
 
     // Get directory info for apps

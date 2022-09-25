@@ -5,50 +5,104 @@
 <html>
 <head>
   <meta name="viewport" content="user-scalable=no"/>
-  <script>
-    if(!kindle || typeof kindle === 'undefined') {
-      var kindle = window.kindle || top.kindle;
-    }
-  </script>
   <script src="file:///mnt/us/kwebbrew/polyfill.min.js"></script>
   <script src="file:///mnt/us/kwebbrew/api.js"></script>
   <script src="./main.js"></script>
-  <title>KWEBBREW LAUNCHER</title>
+
+  <link href="./main.css" rel="stylesheet">
+
+  <title>KWEBBREW DEVTOOLS</title>
 </head>
 <body>
-  <h1>DEVTOOLS</h1>
-  <div id="log"></div>
+  <h1>KWEBBREW DEVTOOLS</h1>
+  <textarea rows=15 id="log"></textarea>
 
-  <button onclick="getType();">Get Type</button>
+  <form class="userInput" action="#">
+    <input type="text" id="consoleInput">
+    <button onclick="runJS()">RUN</button>
+  </form>
+  <button onclick="restorePrevious()">PREV</button>
+  <button onclick="restoreNext()">NEXT</button>
 
-  <p>Change Sensitivity:</p>
-  <input id="sense" type="number">
-  <button onclick="changeSensitivity()">DO</button>
+  <div id="lastCommands"></div>
+  
   
   <script>
-    log(typeof(window.kindle));
-    //for (prop in window) {
-    //  log(prop);
-    //}
+    var lastCommandIndex = -1;
+    var lastCommands = [];
 
-    function getType() {
-      if(!kindle || typeof kindle === 'undefined') {
-        var kindle = window.kindle || top.kindle;
-        log("Reloaded Thing:");
-        log(typeof(kindle));
+    function log(logStuff) {
+      document.getElementById("log").innerHTML += "\n" + logStuff.toString();
+      document.getElementById("log").scrollTop = document.getElementById("log").scrollHeight;
+    }
+
+    function restorePrevious() {
+      if (lastCommands.length > 0) {
+        if (document.getElementById("consoleInput").value != lastCommands[lastCommandIndex]) {
+          document.getElementById("consoleInput").value = lastCommands[lastCommandIndex];
+        } else {
+          lastCommandIndex -= 1;
+
+          if (lastCommandIndex <= 0) {
+            lastCommandIndex = 0;
+          }
+          document.getElementById("consoleInput").value = lastCommands[lastCommandIndex];
+        }
+      }
+
+      updateLastCommandList();
+    }
+
+    function restoreNext() {
+      if (lastCommands.length > 0) {
+        lastCommandIndex += 1;
+
+        if (lastCommandIndex >= lastCommands.length) {
+          lastCommandIndex = lastCommands.length-1;
+        }
+        document.getElementById("consoleInput").value = lastCommands[lastCommandIndex];
+      }
+
+      updateLastCommandList();
+    }
+
+    function updateLastCommandList() {
+      const lastCommandDiv = document.getElementById("lastCommands");
+      lastCommandDiv.innerHTML = "";
+      for (var i=0; i < lastCommands.length; i++) {
+        const p = document.createElement("p");
+        p.innerText = lastCommands[i];
+
+        if (i == lastCommandIndex) {
+          p.classList.add("activeCommand");
+        }
+
+        lastCommandDiv.appendChild(p);
       }
     }
 
-    log (kindle.dev.setSensitivity.toString());
+    function runJS() {
+      const code = document.getElementById("consoleInput").value;
 
-    function log(logStuff) {
-      var p = document.createElement("p");
-      p.innerText = logStuff.toString();
-      document.getElementById("log").appendChild(p);
-    }
+      lastCommands.push(code);
+      lastCommandIndex = lastCommands.length-1;
+      
+      try {
+        var output = window.eval(code);
+      } catch (err) {
+        var output = err.name + ": " + err.message;
+      }
 
-    function changeSensitivity() {
-      kindle.dev.setSensitivity(true, document.getElementById("sense"))
+      if (output == undefined) {
+        output = code;
+      } else if (typeof(output) == "object") {
+        output = JSON.stringify(output);
+      }
+
+      document.getElementById("consoleInput").value = "";
+      log(output.toString());
+
+      updateLastCommandList();
     }
   </script>
 </body>
