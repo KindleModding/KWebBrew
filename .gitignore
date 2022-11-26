@@ -1,2 +1,5 @@
 .active_content_sandbox/
 fonts/
+apps/*
+!apps/devtools
+!apps/file browser
