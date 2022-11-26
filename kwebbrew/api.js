@@ -4,7 +4,13 @@
 //                               //
 //===============================//
 
-function fetchData(url, timeout) {
+
+
+function fetchData(url, timeout, fixKindleFormatting) {
+  if (typeof(fixKindleFormatting) === 'undefined') {
+    fixKindleFormatting=true
+  }
+
   return new Promise(function (callback) {
     // Create iframe
     const iframe = document.createElement("iframe");
@@ -28,8 +34,13 @@ function fetchData(url, timeout) {
       // Remove iframe from DOM
       event.target.remove();
 
+      if (fixKindleFormatting) {
+        // (replace applies to a lot of file types, not just directory listings)
+        iframeSource = iframeSource.replace('<head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">', '').replace('</pre></body>', '');
+      }
+
       // Resolve promise
-      callback(iframeSource.replace('<head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">', '').replace('</pre></body>', ''));
+      callback(iframeSource);
     });
   });
 }

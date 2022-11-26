@@ -4,14 +4,21 @@
 //                               //
 //===============================//
 
-// DO NOT USE IN PROD, THIS API IS DESIGNED FOR DEV USE ONLY
-function fetchData(url, timeout) {
+// DO NOT USE THIS API IN KINDLE APPS, THIS API IS DESIGNED FOR DESKTOP DEVELOPMENT USE ONLY
+
+function fetchData(url, timeout, fixKindleFormatting) {
+  if (typeof(fixKindleFormatting) === 'undefined') {
+    fixKindleFormatting=true
+  }
+  
   return new Promise(function (callback) {
     // Create iframe
     const iframe = document.createElement("iframe");
     iframe.src = url;
 
     // Add iframe to body
+    console.log("body")
+    console.log(document.body);
     document.body.appendChild(iframe);
 
     // Timeout To Remove iframe
@@ -29,8 +36,13 @@ function fetchData(url, timeout) {
       // Remove iframe from DOM
       event.target.remove();
 
+      if (fixKindleFormatting) {
+        // (replace applies to a lot of file types, not just directory listings)
+        iframeSource = iframeSource.replace('<head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">', '').replace('</pre></body>', '');
+      }
+
       // Resolve promise
-      callback(iframeSource.replace('<head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">', '').replace('</pre></body>', ''));
+      callback(iframeSource);
     });
   });
 }
