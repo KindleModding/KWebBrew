@@ -75,3 +75,11 @@ function getDirectory(location) {
     });
   });
 }
+
+function flashDisplay() {
+  document.body.style = "background-color: black; color: white;";
+
+  setTimeout(function () {
+    document.body.style = "";
+  }, 100)
+}
