@@ -3,6 +3,10 @@
 <br/>
 Kindle Web-Based HomeBrew Launcher
 
+| ![KWebBrew](https://user-images.githubusercontent.com/69104218/221427027-d45aeb65-207b-48a6-9045-1a6da4aec81f.png) | ![KChess](https://user-images.githubusercontent.com/69104218/221427026-ff771cea-c43b-4b0b-924b-13d013bced99.png) |
+|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+
+
 ## What Is It?
 The KWebBrew Launcher (Kindle Web-Based HomeBrew Launcher) allows people to code custom HTML webapps which are then stored locally on the Kindle itself, without the need for an internet connection or jailbreak!
 <br/>
@@ -12,8 +16,23 @@ The KWebBrew Launcher also comes with a few applications of its own, such as a r
 <br/>
 Lastly, the KWebBrew Launcher also comes with an API which other applications can use to read local files/directories as well as a polyfill including most standard ES6 features (see [Limitations](https://github.com/Bluebotlaboratories/KWebBrew/#Limitations))
 
+## Compatability
+This is currently tested on the latest Kindle firmware
+
 ## Installation
-Coming Soon!
+1. Download the latest release `KWebBrew.zip` file
+2. Extract the zip file
+3. Copy the `apps` and `kwebbrew` folders to the root of your Kindle
+4. Copy the `.active_content_sandbox` folder to the root of your Kindle (note: this erases your web browser history and any custom bookmarks)
+DONE!
+
+## How do I install apps?
+Apps are HTML apps which are installed in the `apps` folder of your Kindle, they will appear on the launcher as shown in the images
+To install an app, simply download it, and copy the folder to the `apps` folder
+KWebBrew comes with a few proof-of-concept apps such as [Sudoku](https://www.mobileread.com/forums/showthread.php?p=4276488) (Created by [tesseractcat](https://www.mobileread.com/forums/member.php?u=282955) on the mobileread forums) or KChess (still a work in progress) and KCalc (a Kindle calculator)
+
+## Info for developers
+Please see the wiki (Work In Progress)
 
 ## How Does It Work?
 Since the Kindle browser can access local files, and the fact that we know the mount path for USB, this means that the browser can load local HTML files!
