@@ -6,7 +6,7 @@
 
 // DO NOT USE THIS API IN KINDLE APPS, THIS API IS DESIGNED FOR DESKTOP DEVELOPMENT USE ONLY
 
-function fetchData(url, timeout, fixKindleFormatting) {
+function fetchFile(url, timeout, fixKindleFormatting) {
   if (typeof(fixKindleFormatting) === 'undefined') {
     fixKindleFormatting=true
   }
@@ -51,7 +51,7 @@ function fetchData(url, timeout, fixKindleFormatting) {
 function getDirectory(location) {
   return new Promise(function (callback) {
     // Get source of directory listing
-    fetchData(location).then(function (data) {
+    fetchFile(location).then(function (data) {
       // Create list
       var files = [
         {

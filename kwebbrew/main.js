@@ -24,7 +24,7 @@ function generateTable(appList, columns) {
   for (var i = 0; i < appList.length; i++) {
     log(appList[i].path + "manifest.json");
     // Add app manifest promise to list
-    appManifestPromises.push(fetchData(appList[i].path + "/manifest.json"));
+    appManifestPromises.push(fetchFile(appList[i].path + "/manifest.json"));
   }
 
   // Execute all promises
