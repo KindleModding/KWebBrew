@@ -1,4 +1,6 @@
 {
+  "minVersion": 1,
+  "version": 1,
   "name": "devtools",
   "author": "Bluebotlaboratories",
   "description": "Javascript Debug and Developer Tools For kwebdev",
