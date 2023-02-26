@@ -1,0 +1,57 @@
+/*===============================*/
+/*                               */
+/* Copyright Bluebotlaboratories */
+/*                               */
+/*===============================*/
+
+* {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+#title {
+  text-align: center;
+}
+
+table {
+  border-style: solid;
+  border-width: 1px;
+  border-spacing: 0;
+}
+
+#chessBoard td {
+  font-size: 2em;
+  text-align: center;
+  height: 2.5em;
+  width: 2.5em;
+  text-anchor: middle;
+  vertical-align: middle;
+}
+
+.boardWhiteCell {
+  background-color: white;
+}
+
+.boardBlackCell {
+  background-color: maroon;
+}
+
+.boardActiveCell {
+  outline: dashed black;
+  outline-width: 5px;
+  outline-offset: -5px;
+}
+
+.cellImage {
+  height: 2.5em;
+  display: block;
+}
+
+.boardMovableCell {
+  outline: dashed green;
+  outline-width: 10px;
+  outline-offset: -10px;
+}

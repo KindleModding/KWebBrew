@@ -1,0 +1,8 @@
+{
+  "name": "KChess",
+  "author": "Bluebotlaboratories",
+  "description": "Chess on a Kindle!",
+  "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
+  "icon": "icon.jpg",
+  "entrypoint": "index.html"
+}

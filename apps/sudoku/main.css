@@ -1,0 +1,135 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  margin-top: 0px;
+  overflow: hidden;
+}
+
+hr {
+  background-color: #999999;
+  height: 1px;
+  margin: 0px;
+}
+
+.slimline {
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 0.5px;
+}
+
+.entry {
+  font-family: arial;
+  display: block;
+  height: 180px;
+  vertical-align: center;
+}
+
+h1 {
+  margin: 0px;
+  display: inherit;
+  position: relative;
+  top: 14px;
+  font-size: 1.5em;
+}
+
+#footer {
+  width: 100%;
+  border-top: 2px solid #999999;
+  position: absolute;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  bottom: 0px;
+  padding-bottom: 0px;
+  text-align: center;
+  background-color: white;
+}
+
+#footer h2 {
+  display: inline;
+}
+
+#footer button {
+  background-color: white;
+  border: 2px solid black;
+  padding: 5px;
+  margin: 10px;
+}
+
+#title {
+  padding: 0px;
+  text-align: center;
+}
+
+.entry button {
+  margin: 30px 15px 30px 15px;
+  width: 70px;
+  height: 80px;
+  background-color: white;
+  border: 2px solid black;
+}
+
+#sudoku-board {
+  width: 850px;
+  height: 850px;
+  float: center;
+  margin-top: 70px;
+  border: 2px solid black;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+
+td {
+  border: 1px solid #999999;
+  margin: 0px;
+  font-size: 50px;
+  position: relative;
+  height: 80px;
+  width: 80px;
+  box-sizing: border-box;
+}
+
+.notes {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 28px;
+}
+
+
+[data-editable="false"] {
+  font-weight: bold;
+}
+
+.bottom-border td {
+  border-bottom: 2px solid black;
+}
+
+.right-border {
+  border-right: 2px solid black;
+}
+
+.change-num {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 50px;
+  background-color: transparent;
+}
+
+.selected {
+  outline: 3px solid black !important;
+  /*width:74px;
+  height:74px;*/
+}
+
+.hline {
+  height: 121px;
+  width: 2px;
+  background-color: #999999;
+  display: inline-block;
+  margin-top: -20px;
+  margin-bottom: -42px;
+}

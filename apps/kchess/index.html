@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+
+<!-- Copyright Bluebotlaboratories -->
+
+<html>
+<head>
+  <meta name="viewport" content="user-scalable=no"/>
+  <!-- -->
+  <script src="file:///mnt/us/kwebbrew/polyfill.min.js"></script>
+  <script src="file:///mnt/us/kwebbrew/api.js"></script>
+  <!--
+  <script src="../../kwebbrew/polyfill.min.js"></script>
+  -->
+  <script src="./main.js"></script>
+
+  <link href="./main.css" rel="stylesheet">
+
+  <title>KChess</title>
+</head>
+<body onload="onPageLoad()">
+  <div id="log" style="display:none;"></div>
+
+  <h1 id="title">KChess</h1>
+  <center>
+    <div id="chessBoard">
+    </div>
+  </center>
+
+  <center>
+    <h2>KChess</h2>
+    <button onclick="resetBoard()">Reset Board</button>
+    <br/>
+    <label>FEN</label>
+    <input type="text" id="fenInput">
+    <button onclick="loadFENFromInput()">Load FEN</button>
+    <p>KChess uses the Tatiana Piece Set Created by sadsnake1 licensed under CC BY-NC-SA 4.0</p>
+  </center>
+
+  <script>
+    function loadFENFromInput() {
+      var fen = document.getElementById("fenInput").value;
+      window.boardData = parseFenToBoard(fen);
+      var renderedBoard = renderBoard(window.boardData, renderChessBoardCell);
+      document.getElementById("chessBoard").children[0].remove();
+      document.getElementById("chessBoard").appendChild(renderedBoard);
+    }
+
+    function resetBoard() {
+      document.getElementById("fenInput").value = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+      loadFENFromInput();
+    }
+  </script>
+</body>
+</html>
