@@ -27,6 +27,11 @@ Should work an all previous and future firmware versions
 4. Copy the `.active_content_sandbox` folder to the root of your Kindle (note: this erases your web browser history and any custom bookmarks)
 DONE!
 
+## How To Use
+KWebBrew automatically installs a browser extension for itself when copying the `.active_content_sandbox` folder, simply select this bookmark and it will open KWebBrew
+
+KWebBrew also doesn't require an internet connection to function, simply open it and select an app
+
 ## How do I install apps?
 Apps are HTML apps which are installed in the `apps` folder of your Kindle, they will appear on the launcher as shown in the images
 To install an app, simply download it, and copy the folder to the `apps` folder
