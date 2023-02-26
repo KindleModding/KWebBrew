@@ -21,7 +21,7 @@ Last Tested on Kindle Firmware: 5.15.1
 Should work an all previous and future firmware versions
 
 ## Installation
-1. Download the latest release `KWebBrew.zip` file
+1. Download the [latest release](https://github.com/Bluebotlaboratories/KWebBrew/releases/latest) `KWebBrew.zip` file
 2. Extract the zip file
 3. Copy the `apps` and `kwebbrew` folders to the root of your Kindle
 4. Copy the `.active_content_sandbox` folder to the root of your Kindle (note: this erases your web browser history and any custom bookmarks)
