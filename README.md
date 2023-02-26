@@ -3,7 +3,7 @@
 <br/>
 Kindle Web-Based HomeBrew Launcher
 
-| ![KWebBrew](https://user-images.githubusercontent.com/69104218/221427027-d45aeb65-207b-48a6-9045-1a6da4aec81f.png) | ![KChess](https://user-images.githubusercontent.com/69104218/221427026-ff771cea-c43b-4b0b-924b-13d013bced99.png) |
+| ![KWebBrew](https://user-images.githubusercontent.com/69104218/221430829-2d8a92cc-a9ac-4f91-8bee-def53410eb66.png) | ![KChess](https://user-images.githubusercontent.com/69104218/221427026-ff771cea-c43b-4b0b-924b-13d013bced99.png) |
 |------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
 
 
