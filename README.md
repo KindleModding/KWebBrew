@@ -1,4 +1,6 @@
 # KWebBrew
+![badge](https://img.shields.io/github/downloads/Bluebotlaboratories/KWebBrew/total?style=for-the-badge)
+
 (<strong>K</strong>·Web·Brew)
 <br/>
 Kindle Web-Based HomeBrew Launcher
