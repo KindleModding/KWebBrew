@@ -83,3 +83,17 @@ function flashDisplay() {
     document.body.style = "";
   }, 100)
 }
+
+function joinPaths(path1, path2) {
+  if (path1.slice(-1) == '/') {
+    path1 = path1.slice(0, -1);
+  }
+
+  if (path2.slice(0,2) == './') {
+    path2 = path2.slice(1);
+  } else if (path2[0] != '/') {
+    path2 = '/' + path2;
+  }
+
+  return path1 + path2;
+}

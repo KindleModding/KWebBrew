@@ -1,9 +1,12 @@
 {
   "minVersion": 1,
-  "version": 1,
+  "manifestVersion": 2,
+  "appVersion": "v1.0.0",
+  "waf": false,
+  "id": "com.bluebotlaboratories.devtools",
   "name": "devtools",
   "author": "Bluebotlaboratories",
-  "description": "Javascript Debug and Developer Tools For kwebdev",
+  "description": "Javascript Console-ish For KWebBrew",
   "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
   "icon": "icon.jpg",
   "entrypoint": "index.html"

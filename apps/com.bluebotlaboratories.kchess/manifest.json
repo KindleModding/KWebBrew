@@ -1,9 +1,12 @@
 {
   "minVersion": 1,
-  "version": 1,
-  "name": "File Browser",
+  "manifestVersion": 2,
+  "appVersion": "v0.1.0",
+  "waf": false,
+  "id": "com.bluebotlaboratories.kchess",
+  "name": "KChess",
   "author": "Bluebotlaboratories",
-  "description": "Simple Read-Only File Browser For Kindles",
+  "description": "Chess on a Kindle!",
   "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
   "icon": "icon.jpg",
   "entrypoint": "index.html"

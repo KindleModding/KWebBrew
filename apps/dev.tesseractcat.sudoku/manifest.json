@@ -1,6 +1,9 @@
 {
   "minVersion": 1,
-  "version": 1,
+  "manifestVersion": 2,
+  "appVersion": "v2.0.0",
+  "waf": false,
+  "id": "dev.tesseractcat.sudoku",
   "name": "Sudoku",
   "author": "Tesseractcat",
   "description": "Sudoku for the Kindle",

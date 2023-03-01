@@ -4,6 +4,9 @@
 //                               //
 //===============================//
 
+var versionInt = 2;
+var versionString = 'v1.1.0'
+
 // Log js errors to log
 addEventListener("error", function (event) {
   document.body.innerText = event.message + "\nAt: " + event.lineno + ":" + event.colno + "\nIn: " + event.filename;
@@ -24,7 +27,7 @@ function generateTable(appList, columns) {
   for (var i = 0; i < appList.length; i++) {
     log(appList[i].path + "manifest.json");
     // Add app manifest promise to list
-    appManifestPromises.push(fetchFile(appList[i].path + "/manifest.json"));
+    appManifestPromises.push(fetchFile(joinPaths(appList[i].path, "/manifest.json")));
   }
 
   // Execute all promises
@@ -50,17 +53,25 @@ function generateTable(appList, columns) {
         // Parse manifest file
         var appData = JSON.parse(appManifests[i]);
 
+        // Handle different manifest versions
+        switch (appData.manifestVersion) {
+          case 2:
+            if (appData.minVersion > versionInt || appData.waf) {
+              continue
+            }
+        }
+
         // Create table cell
         const appCell = document.createElement("td");
         appCell.classList.add("app");
 
         // Create app link (cross-reference path from the appList since the manifest doesn't contain it)
         const appAnchor = document.createElement("a");
-        appAnchor.href = appList[i].path + "/" + appData.entrypoint;
+        appAnchor.href = joinPaths(appList[i].path, appData.entrypoint);
 
         // Create app icon element
         const appImage = document.createElement("img");
-        appImage.src = appList[i].path + "/" + appData.icon;
+        appImage.src = joinPaths(appList[i].path, appData.icon);
 
         // Create app title element
         const appName = document.createElement("p");

@@ -1,7 +1,6 @@
 .active_content_sandbox/
 fonts/
 apps/*
-!apps/devtools
-!apps/file browser
-!apps/kchess
-!apps/sudoku
+!apps/com.bluebotlaboratories.devtools
+!apps/com.bluebotlaboratories.kchess
+!apps/dev.tesseractcat.sudoku
