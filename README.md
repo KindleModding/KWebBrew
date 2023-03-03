@@ -30,7 +30,7 @@ Should work an all previous and future firmware versions
 DONE!
 
 ## How To Use
-KWebBrew automatically installs a browser extension for itself when copying the `.active_content_sandbox` folder, simply select this bookmark and it will open KWebBrew
+KWebBrew automatically installs a bookmark for itself when copying the `.active_content_sandbox` folder, simply select this bookmark and it will open KWebBrew
 
 KWebBrew also doesn't require an internet connection to function, simply open it and select an app
 
