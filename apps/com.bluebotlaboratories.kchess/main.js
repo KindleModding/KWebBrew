@@ -47,7 +47,8 @@ function createGame() {
 function handleCellClick(event) {
   var selectionCoords = convertToNumericalCoords(event.currentTarget.id)
   // Check if the selected cell is even a piece or if it is valid given the current player's turn
-  if (document.getElementsByClassName("boardActiveCell").length == 0 && window.boardData[selectionCoords[0]][selectionCoords[1]] != null && window.boardData[selectionCoords[0]][selectionCoords[1]][0] != window.gameData.currentTurn) {
+  if (document.getElementsByClassName("boardActiveCell").length == 0 && (window.boardData[selectionCoords[0]][selectionCoords[1]] == null || window.boardData[selectionCoords[0]][selectionCoords[1]][0] != window.gameData.currentTurn)) {
+    log("Invalid selection, ignoring")
     return;
   }
 
@@ -76,14 +77,17 @@ function handleCellClick(event) {
     } else {
       window.gameData.currentTurn = 'w';
     }
-  } else if (window.boardData[targetCoords[0]][targetCoords[1]] == null || window.gameData.currentTurn == window.boardData[targetCoords[0]][targetCoords[1]].toLowerCase()[0]) {
+
+    // Update local storage save
+    window.localStorage.setItem("com.bluebotlaboratories.kchess.boardData", JSON.stringify(window.boardData));
+    window.localStorage.setItem("com.bluebotlaboratories.kchess.gameData", JSON.stringify(window.gameData));
+  } else if (window.gameData.currentTurn == window.boardData[targetCoords[0]][targetCoords[1]].toLowerCase()[0]) {
     log("Deselecting cells")
     // Deselect any movable cells
     var movableCells = document.getElementsByClassName("boardMovableCell");
-    log(movableCells.length.toString())
-    while (movableCells.length > 0) {
-      movableCells = document.getElementsByClassName("boardMovableCell");
-      movableCells[0].classList.remove("boardMovableCell");
+    log(movableCells.length)
+    for (var i=0; i < movableCells.length; i++) {
+      movableCells[i].classList.remove("boardMovableCell");
     }
     
     // If it is active, then deactivate it and end function
@@ -93,9 +97,10 @@ function handleCellClick(event) {
     } else {
       // Deselect any other active cells
       var activeCells = document.getElementsByClassName("boardActiveCell");
-      while (activeCells.length > 0) {
-        activeCells = document.getElementsByClassName("boardActiveCell");
-        activeCells[0].classList.remove("boardActiveCell");
+      log("Deselecting Active Cells")
+      log(activeCells.length)
+      for (var i=0; i < activeCells.length; i++) {
+        activeCells[i].classList.remove("boardActiveCell");
       }
 
       // Set cell as selected
@@ -490,8 +495,15 @@ function onPageLoad() {
   chessBoard = document.getElementById("chessBoard");
 
   window.boardData = createBoard(8, 8);
-
   window.gameData = createGame();
+  
+  // Load local save if it exists
+  var localBoardData = window.localStorage.getItem("com.bluebotlaboratories.kchess.boardData");
+  var localGameData = window.localStorage.getItem("com.bluebotlaboratories.kchess.gameData");
+  if (localBoardData && localGameData) {
+    window.boardData = JSON.parse(localBoardData);
+    window.gameData = JSON.parse(localGameData);
+  }
 
   chessBoard.appendChild(renderBoard(boardData, renderChessBoardCell));
 }

@@ -34,7 +34,7 @@
     <input type="text" id="fenInput">
     <button onclick="loadFENFromInput()">Load FEN</button>
     <p>KChess uses the Tatiana Piece Set Created by sadsnake1 licensed under CC BY-NC-SA 4.0</p>
-    <p>v0.1.0</p>
+    <p>v0.2.0</p>
   </center>
 
   <script>
@@ -49,6 +49,9 @@
     function resetBoard() {
       document.getElementById("fenInput").value = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
       loadFENFromInput();
+      window.gameData = createGame();
+      window.localStorage.setItem("com.bluebotlaboratories.kchess.boardData", JSON.stringify(window.boardData));
+      window.localStorage.setItem("com.bluebotlaboratories.kchess.gameData", JSON.stringify(window.gameData));
     }
   </script>
 </body>

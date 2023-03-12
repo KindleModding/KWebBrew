@@ -8,6 +8,6 @@
   "author": "Tesseractcat",
   "description": "Sudoku for the Kindle",
   "repo": "https://www.mobileread.com/forums/showthread.php?p=4276488#post4276488",
-  "icon": "icon.jpg",
+  "icon": "icon.png",
   "entrypoint": "sudoku.html"
 }
