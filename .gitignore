@@ -1,6 +1,7 @@
 .active_content_sandbox/
 fonts/
 apps/*
+!apps/com.kwebbrew.settings
 !apps/com.bluebotlaboratories.devtools
 !apps/com.bluebotlaboratories.kchess
 !apps/dev.tesseractcat.sudoku

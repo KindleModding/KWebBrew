@@ -3,26 +3,46 @@
 <!-- Copyright Bluebotlaboratories -->
 
 <html>
+
 <head>
-  <meta name="viewport" content="user-scalable=no"/>
+  <meta name="viewport" content="user-scalable=no" />
   <script src="./polyfill.min.js"></script>
   <script src="./sdk.js"></script>
   <script src="./main.js"></script>
 
   <link href="./main.css" rel="stylesheet">
 
-  <title>KWEBBREW LAUNCHER</title>
+  <title>KWebBrew LAUNCHER</title>
 </head>
-<body onload="onPageLoad()">
-  <div class="title">
-    <h1>KWebBrew - Web-Based Homebrew System</h1>
-    <p>v1.1.0</p>
-  </div>
-  
-  <table id="appTable" class="appTable">
-  </table>
 
-  <button onclick="toggleLog()">TOGGLE LOG</button>
-  <div id="log" style="display: none;"></div>
+<body onload="onPageLoad()">
+  <table class="pageWrapper">
+    <tbody style="min-height: 100vh;">
+    <tr><td>
+      <div class="title">
+        <h1>KWebBrew - Web-Based Homebrew System</h1>
+        <p>v1.2.0</p>
+      </div>
+    </td></tr>
+
+    <tr style="height: 100%;"><td>
+      <div class="tableWrapper">
+        <p id="loading">Loading Your Apps...</p>
+        <table id="appTable" class="appTable">
+        </table>
+      </div>
+    </td></tr>
+
+    <tr><td>
+      <div class="logSection">
+        <center>
+          <button onclick="toggleLog()">TOGGLE LOG</button>
+        </center>
+        <div id="log" style="display: none;"></div>
+      </div>
+    </td></tr>
+  </tbody>
+  </table>
 </body>
+
 </html>

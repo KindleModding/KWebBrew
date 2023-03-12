@@ -1,0 +1,10 @@
+{
+    "manifestVersion": 1,
+    "themeVersion": "v1.0.0",
+    "id": "com.kwebbrew.defaultTheme",
+    "name": "Default",
+    "author": "Bluebotlaboratories",
+    "description": "The default theme for KWebBrew",
+    "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
+    "entrypoint": "default.css"
+}

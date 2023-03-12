@@ -1,0 +1,13 @@
+{
+  "minVersion": 1,
+  "manifestVersion": 2,
+  "appVersion": "v1.0.0",
+  "waf": false,
+  "id": "com.kwebbrew.settings",
+  "name": "Settings",
+  "author": "Bluebotlaboratories",
+  "description": "Settings For KWebBrew",
+  "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
+  "icon": "icon.png",
+  "entrypoint": "index.html"
+}

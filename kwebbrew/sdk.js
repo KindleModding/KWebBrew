@@ -5,6 +5,11 @@
 //===============================//
 
 
+//function log(logData) { // Log to file
+//  var currentLog = JSON.parse(window.localStorage.getItem("latest.log"));
+//  currentLog.push(new Date().toISOString() + " - " + logData)
+//  window.localStorage.setItem("latest.log", JSON.stringify(currentLog))
+//}
 
 function fetchFile(url, timeout, fixKindleFormatting) {
   if (typeof(fixKindleFormatting) === 'undefined') {
@@ -14,6 +19,7 @@ function fetchFile(url, timeout, fixKindleFormatting) {
   return new Promise(function (callback) {
     // Create iframe
     const iframe = document.createElement("iframe");
+    iframe.style = "width: 0px; height: 0px;"
     iframe.src = url;
 
     // Add iframe to body

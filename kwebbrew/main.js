@@ -5,11 +5,14 @@
 //===============================//
 
 var versionInt = 2;
-var versionString = 'v1.1.0'
+var versionString = 'v1.2.0'
+
+// Clear localStorage log
+window.localStorage.setItem("latest.log", JSON.stringify([])) // Empty log
 
 // Log js errors to log
 addEventListener("error", function (event) {
-  document.body.innerText = event.message + "\nAt: " + event.lineno + ":" + event.colno + "\nIn: " + event.filename;
+  log(event.message + "\nAt: " + event.lineno + ":" + event.colno + "\nIn: " + event.filename);
 });
 
 // Create fancy HTML table to display apps
@@ -113,9 +116,22 @@ function toggleLog() {
 }
 
 function onPageLoad() {
+  // Setup config if not already setup
+  if (!window.localStorage.getItem("com.kwebbrew.settings.theme")) {
+    window.localStorage.setItem("com.kwebbrew.settings.theme", "file:///mnt/us/kwebbrew/themes/com.kwebbrew.default/default.css")
+  }
+  // Load Theme
+  var themeLoader = document.createElement("link");
+  themeLoader.href = window.localStorage.getItem("com.kwebbrew.settings.theme");
+  themeLoader.setAttribute("rel", "stylesheet");
+  document.body.appendChild(themeLoader);
+  log("Theme loaded");
+  log(themeLoader.href);
+
   // Actually do the stuff
   // Get directory info for apps
-  getDirectory("../apps/").then(function (data) {
+  getDirectory("file:///mnt/us/apps/").then(function (data) {
+    document.getElementById("loading").remove()
     // Generate the actual table given the list of app folders
     generateTable(data);
   });
