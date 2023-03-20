@@ -7,6 +7,7 @@ function log(logStuff) {
   var p = document.createElement("p");
   p.innerText = logStuff.toString();
   document.getElementById("log").appendChild(p);
+  console.log(logStuff);
 }
 
 // Log js errors to log
@@ -85,9 +86,13 @@ function handleCellClick(event) {
     log("Deselecting cells")
     // Deselect any movable cells
     var movableCells = document.getElementsByClassName("boardMovableCell");
-    log(movableCells.length)
-    for (var i=0; i < movableCells.length; i++) {
-      movableCells[i].classList.remove("boardMovableCell");
+    log(movableCells.length);
+    //for (var i=0; movableCells.length > 0; i++) { // For loop faster than while loop that does the same thing
+    //  movableCells[0].classList.remove("boardMovableCell");
+    //}
+
+    while (movableCells.length > 0) {
+      movableCells[0].classList.remove("boardMovableCell");
     }
     
     // If it is active, then deactivate it and end function
@@ -124,7 +129,7 @@ function generateMoves(boardData, pieceRowCoordinate, pieceColumnCoordinate, fir
   }
 
   var pieceMovements = {
-    'n': { hop: true, vertical: false, horizontal: false, diagonal: false, diagonalCapture: false, retreat: true, limit: 2, firstLimit: 1 },
+    'n': { hop: true, vertical: false, horizontal: false, diagonal: false, diagonalCapture: false, retreat: true, limit: 1, firstLimit: 2 },
     'b': { hop: false, vertical: false, horizontal: false, diagonal: true, diagonalCapture: false, retreat: true, limit: -1, firstLimit: -1 },
     'k': { hop: false, vertical: true, horizontal: true, diagonal: true, diagonalCapture: false, retreat: true, limit: 1, firstLimit: 1 },
     'p': { hop: false, vertical: true, horizontal: false, diagonal: false, diagonalCapture: true, retreat: false, limit: 1, firstLimit: 2 },
@@ -135,36 +140,76 @@ function generateMoves(boardData, pieceRowCoordinate, pieceColumnCoordinate, fir
   var pieceID = boardData[pieceRowCoordinate][pieceColumnCoordinate].toLowerCase();
   var possibleMovements = [];
 
-  if (firstMove) {
+  if ((pieceID == 'wp' && pieceRowCoordinate == 6) || (pieceID == 'bp' && pieceRowCoordinate == 1)) {
     var movementLimit = pieceMovements[pieceID[1]].firstLimit;
   } else {
     var movementLimit = pieceMovements[pieceID[1]].limit;
   }
 
   if (pieceMovements[pieceID[1]].hop) { // Knight hopping ability
-    if (pieceRowCoordinate - 2 > 0) {
-      if (pieceColumnCoordinate + 1 < 8 && boardData[pieceRowCoordinate - (pieceMovements[pieceID[1]].firstLimit)][pieceColumnCoordinate + (movementLimit)][0] != pieceID[0]) {
-        possibleMovements.push([pieceRowCoordinate - (pieceMovements[pieceID[1]].firstLimit), pieceColumnCoordinate + (movementLimit)]);
+    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'w') { // Move towards black
+      // Add "forwards" movements
+      if (pieceRowCoordinate - pieceMovements[pieceID[1]].firstLimit >= 0) {
+        if (pieceColumnCoordinate + pieceMovements[pieceID[1]].limit < 8) {
+          if (boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate + pieceMovements[pieceID[1]].limit] === null || boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate + pieceMovements[pieceID[1]].limit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate - pieceMovements[pieceID[1]].firstLimit, pieceColumnCoordinate + pieceMovements[pieceID[1]].limit]);
+          }
+        }
+        if (pieceColumnCoordinate - pieceMovements[pieceID[1]].limit >= 0) {
+          if (boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate - pieceMovements[pieceID[1]].limit] === null || boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate - pieceMovements[pieceID[1]].limit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate - pieceMovements[pieceID[1]].firstLimit, pieceColumnCoordinate - pieceMovements[pieceID[1]].limit]);
+          }
+        }
       }
-      if (pieceColumnCoordinate - 1 > 0 && boardData[pieceRowCoordinate - (pieceMovements[pieceID[1]].firstLimit)][pieceColumnCoordinate - (movementLimit)][0] != pieceId[0]) {
-        possibleMovements.push([pieceRowCoordinate - (pieceMovements[pieceID[1]].firstLimit), pieceColumnCoordinate - (movementLimit)]);
+
+      // Add "side" movements
+      if (pieceRowCoordinate - pieceMovements[pieceID[1]].limit >= 0) {
+        if (pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit < 8) {
+          if (boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].limit][pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit] === null || boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].limit][pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate - pieceMovements[pieceID[1]].limit, pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit]);
+          }
+        }
+        if (pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit >= 0) {
+          if (boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].limit][pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit] === null || boardData[pieceRowCoordinate - pieceMovements[pieceID[1]].limit][pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate - pieceMovements[pieceID[1]].limit, pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit]);
+          }
+        }
       }
     }
 
-    if (pieceMovements[pieceID[1]].retreat) { // If the knight can retreat
-      if (pieceRowCoordinate + 2 < 8) {
-        if (pieceColumnCoordinate + 1 < 8 && boardData[pieceRowCoordinate + (pieceMovements[pieceID[1]].firstLimit)][pieceColumnCoordinate + (movementLimit)][0] != pieceID[0]) {
-          possibleMovements.push([pieceRowCoordinate + (pieceMovements[pieceID[1]].firstLimit), pieceColumnCoordinate + (movementLimit)]);
+    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'b') { // Move towards white
+      // Add "forwards" movements
+      if (pieceRowCoordinate + pieceMovements[pieceID[1]].firstLimit < 8) {
+        if (pieceColumnCoordinate + pieceMovements[pieceID[1]].limit < 8) {
+          if (boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate + pieceMovements[pieceID[1]].limit] === null || boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate + pieceMovements[pieceID[1]].limit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate + pieceMovements[pieceID[1]].firstLimit, pieceColumnCoordinate + pieceMovements[pieceID[1]].limit]);
+          }
         }
-        if (pieceColumnCoordinate - 1 > 0 && boardData[pieceRowCoordinate + (pieceMovements[pieceID[1]].firstLimit)][pieceColumnCoordinate - (movementLimit)][0] != pieceID[0]) {
-          possibleMovements.push([pieceRowCoordinate + (pieceMovements[pieceID[1]].firstLimit), pieceColumnCoordinate - (movementLimit)]);
+        if (pieceColumnCoordinate - pieceMovements[pieceID[1]].limit >= 0) {
+          if (boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate - pieceMovements[pieceID[1]].limit] === null || boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].firstLimit][pieceColumnCoordinate - pieceMovements[pieceID[1]].limit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate + pieceMovements[pieceID[1]].firstLimit, pieceColumnCoordinate - pieceMovements[pieceID[1]].limit]);
+          }
+        }
+      }
+
+      // Add "side" movements
+      if (pieceRowCoordinate + pieceMovements[pieceID[1]].limit < 8) {
+        if (pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit < 8) {
+          if (boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].limit][pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit] === null || boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].limit][pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate + pieceMovements[pieceID[1]].limit, pieceColumnCoordinate + pieceMovements[pieceID[1]].firstLimit]);
+          }
+        }
+        if (pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit >= 0) {
+          if (boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].limit][pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit] === null || boardData[pieceRowCoordinate + pieceMovements[pieceID[1]].limit][pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit][0] != pieceID[0]) {
+            possibleMovements.push([pieceRowCoordinate + pieceMovements[pieceID[1]].limit, pieceColumnCoordinate - pieceMovements[pieceID[1]].firstLimit]);
+          }
         }
       }
     }
   }
 
   if (pieceMovements[pieceID[1]].vertical) { // Vertical movement ability
-    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'w') {
+    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'w') { // Basically if piece can move in direction towards black
       if (movementLimit != -1 && pieceRowCoordinate - movementLimit >= 0) {
         var calculatedLimit = movementLimit;
       } else {
@@ -183,7 +228,7 @@ function generateMoves(boardData, pieceRowCoordinate, pieceColumnCoordinate, fir
       }
     }
 
-    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'b') { // Going backwards (or black)
+    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'b') { // Basically if piece can move in direction towards white
       if (movementLimit != -1 && pieceRowCoordinate + movementLimit < 8) { // If there is blank space or capturable piece
         var calculatedLimit = movementLimit;
       } else {
@@ -250,63 +295,67 @@ function generateMoves(boardData, pieceRowCoordinate, pieceColumnCoordinate, fir
       var calculatedLimit = movementLimit;
     }
 
-    // Going row+ col+
-    for (var i = 1; i <= calculatedLimit; i++) {
-      if (pieceRowCoordinate + i >= 8 || pieceColumnCoordinate + i >= 8 || (boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
-        break;
-      }
-      if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i] == null || boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i][0] != pieceID[0]) {
-        possibleMovements.push([pieceRowCoordinate + i, pieceColumnCoordinate + i]);
-        if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i] != null) {
-          break; // Stop checking once a piece is hit
+    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'b') {
+      // Going row+ col+
+      for (var i = 1; i <= calculatedLimit; i++) {
+        if (pieceRowCoordinate + i >= 8 || pieceColumnCoordinate + i >= 8 || (boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
+          break;
         }
-      } else {
-        break;
+        if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i] == null || boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i][0] != pieceID[0]) {
+          possibleMovements.push([pieceRowCoordinate + i, pieceColumnCoordinate + i]);
+          if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate + i] != null) {
+            break; // Stop checking once a piece is hit
+          }
+        } else {
+          break;
+        }
+      }
+
+      // Going row+ col-
+      for (var i = 1; i <= calculatedLimit; i++) {
+        if (pieceRowCoordinate + i >= 8 || pieceColumnCoordinate - i < 0 || (boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
+          break
+        }
+        if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i] == null || boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i][0] != pieceID[0]) {
+          possibleMovements.push([pieceRowCoordinate + i, pieceColumnCoordinate - i]);
+          if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i] != null) {
+            break; // Stop checking once a piece is hit
+          }
+        } else {
+          break;
+        }
       }
     }
 
-    // Going row- col+
-    for (var i = 1; i <= calculatedLimit; i++) {
-      if (pieceRowCoordinate - i < 0 || pieceColumnCoordinate + i >= 8 || (boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
-        break;
-      }
-      if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i] == null || boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i][0] != pieceID[0]) {
-        possibleMovements.push([pieceRowCoordinate - i, pieceColumnCoordinate + i]);
-        if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i] != null) {
-          break; // Stop checking once a piece is hit
+    if (pieceMovements[pieceID[1]].retreat || pieceID[0] == 'w') {
+      // Going row- col+
+      for (var i = 1; i <= calculatedLimit; i++) {
+        if (pieceRowCoordinate - i < 0 || pieceColumnCoordinate + i >= 8 || (boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
+          break;
         }
-      } else {
-        break;
+        if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i] == null || boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i][0] != pieceID[0]) {
+          possibleMovements.push([pieceRowCoordinate - i, pieceColumnCoordinate + i]);
+          if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate + i] != null) {
+            break; // Stop checking once a piece is hit
+          }
+        } else {
+          break;
+        }
       }
-    }
 
-    // Going row+ col-
-    for (var i = 1; i <= calculatedLimit; i++) {
-      if (pieceRowCoordinate + i >= 8 || pieceColumnCoordinate - i < 0 || (boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
-        break
-      }
-      if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i] == null || boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i][0] != pieceID[0]) {
-        possibleMovements.push([pieceRowCoordinate + i, pieceColumnCoordinate - i]);
-        if (boardData[pieceRowCoordinate + i][pieceColumnCoordinate - i] != null) {
-          break; // Stop checking once a piece is hit
+      // Going row- col-
+      for (var i = 1; i <= calculatedLimit; i++) {
+        if (pieceRowCoordinate - i < 0 || pieceColumnCoordinate - i < 0 || (boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
+          break;
         }
-      } else {
-        break;
-      }
-    }
-
-    // Going row- col-
-    for (var i = 1; i <= calculatedLimit; i++) {
-      if (pieceRowCoordinate - i < 0 || pieceColumnCoordinate - i < 0 || (boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i] == null && pieceMovements[pieceID[1]].diagonalCapture)) {
-        break;
-      }
-      if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i] == null || boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i][0] != pieceID[0]) {
-        possibleMovements.push([pieceRowCoordinate - i, pieceColumnCoordinate - i]);
-        if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i] != null) {
-          break; // Stop checking once a piece is hit
+        if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i] == null || boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i][0] != pieceID[0]) {
+          possibleMovements.push([pieceRowCoordinate - i, pieceColumnCoordinate - i]);
+          if (boardData[pieceRowCoordinate - i][pieceColumnCoordinate - i] != null) {
+            break; // Stop checking once a piece is hit
+          }
+        } else {
+          break;
         }
-      } else {
-        break;
       }
     }
   }
