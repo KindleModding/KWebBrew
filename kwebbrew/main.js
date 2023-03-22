@@ -118,7 +118,7 @@ function toggleLog() {
 function onPageLoad() {
   // Setup config if not already setup
   if (!window.localStorage.getItem("com.kwebbrew.settings.theme")) {
-    window.localStorage.setItem("com.kwebbrew.settings.theme", "file:///mnt/us/kwebbrew/themes/com.kwebbrew.default/default.css")
+    window.localStorage.setItem("com.kwebbrew.settings.theme", "file:///mnt/us/kwebbrew/themes/com.kwebbrew.defaultTheme/default.css")
   }
   // Load Theme
   var themeLoader = document.createElement("link");
