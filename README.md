@@ -1,5 +1,5 @@
 # KWebBrew
-![badge](https://img.shields.io/github/downloads/Bluebotlaboratories/KWebBrew/total?style=for-the-badge)
+![badge](https://img.shields.io/github/downloads/KWebBrew/KWebBrew/total?style=for-the-badge)
 
 (<strong>K</strong>·Web·Brew)
 <br/>
