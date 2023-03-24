@@ -5,6 +5,6 @@
     "name": "Default",
     "author": "Bluebotlaboratories",
     "description": "The default theme for KWebBrew",
-    "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
+    "repo": "https://github.com/KWebBrew/KWebBrew",
     "entrypoint": "default.css"
 }

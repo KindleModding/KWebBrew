@@ -87,13 +87,13 @@ function handleCellClick(event) {
     // Deselect any movable cells
     var movableCells = document.getElementsByClassName("boardMovableCell");
     log(movableCells.length);
-    //for (var i=0; movableCells.length > 0; i++) { // For loop faster than while loop that does the same thing
-    //  movableCells[0].classList.remove("boardMovableCell");
-    //}
-
-    while (movableCells.length > 0) {
+    for (var i=0; movableCells.length > 0; i++) { // For loop faster than while loop that does the same thing
       movableCells[0].classList.remove("boardMovableCell");
     }
+
+    //while (movableCells.length > 0) {
+    //  movableCells[0].classList.remove("boardMovableCell");
+    //}
     
     // If it is active, then deactivate it and end function
     if (event.currentTarget.classList.contains("boardActiveCell")) {

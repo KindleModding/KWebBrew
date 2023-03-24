@@ -7,7 +7,7 @@
   "name": "KChess",
   "author": "Bluebotlaboratories",
   "description": "Chess on a Kindle!",
-  "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
+  "repo": "https://github.com/KWebBrew/KWebBrew",
   "icon": "icon.png",
   "entrypoint": "index.html"
 }

@@ -7,7 +7,7 @@
   "name": "Settings",
   "author": "Bluebotlaboratories",
   "description": "Settings For KWebBrew",
-  "repo": "https://github.com/Bluebotlaboratories/KWebBrew",
+  "repo": "https://github.com/KWebBrew/KWebBrew",
   "icon": "icon.png",
   "entrypoint": "index.html"
 }
