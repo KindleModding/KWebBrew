@@ -5,7 +5,7 @@
 <br/>
 Kindle Web-Based HomeBrew Launcher
 
-| ![KWebBrew](https://github.com/KindleModding/KWebBrew/assets/69104218/5d0e9e22-e9a1-499c-b260-f9f6a7035c22) | ![KChess](https://github.com/KindleModding/KWebBrew/assets/69104218/0ec92f53-0c6e-4431-b558-dd2d0412fc90) |
+| ![KWebBrew](https://github.com/KindleModding/KWebBrew/assets/69104218/f970ef9c-8fb7-43b7-a041-9ca83bbe950e) | ![KChess](https://github.com/KindleModding/KWebBrew/assets/69104218/0ec92f53-0c6e-4431-b558-dd2d0412fc90) |
 |------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
 
 
