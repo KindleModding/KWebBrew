@@ -5,7 +5,7 @@
 <br/>
 Kindle Web-Based HomeBrew Launcher
 
-| ![KWebBrew](https://user-images.githubusercontent.com/69104218/221430829-2d8a92cc-a9ac-4f91-8bee-def53410eb66.png) | ![KChess](https://user-images.githubusercontent.com/69104218/221427026-ff771cea-c43b-4b0b-924b-13d013bced99.png) |
+| ![KWebBrew](https://github.com/KindleModding/KWebBrew/assets/69104218/f970ef9c-8fb7-43b7-a041-9ca83bbe950e) | ![KChess](https://github.com/KindleModding/KWebBrew/assets/69104218/0ec92f53-0c6e-4431-b558-dd2d0412fc90) |
 |------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
 
 
@@ -19,7 +19,7 @@ The KWebBrew Launcher also comes with a few applications of its own, such as a r
 Lastly, the KWebBrew Launcher also comes with an API which other applications can use to read local files/directories as well as a polyfill including most standard ES6 features (see [Limitations](https://github.com/KWebBrew/KWebBrew/#Limitations))
 
 ## Compatability
-Last Tested on Kindle Firmware: 5.15.1
+Last Tested on Kindle Firmware: 5.15.1.1<br/>
 Should work an all previous and future firmware versions
 
 ## Installation
