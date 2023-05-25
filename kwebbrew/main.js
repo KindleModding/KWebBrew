@@ -4,8 +4,8 @@
 //                               //
 //===============================//
 
-var versionInt = 2;
-var versionString = 'v1.2.0'
+var versionInt = 3;
+var versionString = 'v1.2.1'
 
 // Clear localStorage log
 window.localStorage.setItem("latest.log", JSON.stringify([])) // Empty log
@@ -38,8 +38,24 @@ function generateTable(appList, columns) {
     log("Obtained manifests");
     log(JSON.stringify(appManifests));
 
-    // Loop through app manifests
+    var parsedManifests = []; // Store parsed manifests
     for (var i = 0; i < appManifests.length; i++) {
+      // Parse manifest file
+      var appData = JSON.parse(appManifests[i]);
+
+      // Handle different manifest versions
+      switch (appData.manifestVersion) {
+        case 2:
+          if (appData.minVersion > versionInt || appData.waf) {
+            continue
+          }
+      }
+
+      parsedManifests.push(appData);
+    }
+
+    // Loop through app manifests
+    for (var i = 0; i < parsedManifests.length; i++) {
       if (i % columns == 0 && i != 0) {
         // If it is the end of a row, add the row to the table and create a new row
         document.getElementById("appTable").appendChild(tableRow);
@@ -53,32 +69,21 @@ function generateTable(appList, columns) {
 
       // Try/Catch for malformed manifests
       try {
-        // Parse manifest file
-        var appData = JSON.parse(appManifests[i]);
-
-        // Handle different manifest versions
-        switch (appData.manifestVersion) {
-          case 2:
-            if (appData.minVersion > versionInt || appData.waf) {
-              continue
-            }
-        }
-
         // Create table cell
         const appCell = document.createElement("td");
         appCell.classList.add("app");
 
         // Create app link (cross-reference path from the appList since the manifest doesn't contain it)
         const appAnchor = document.createElement("a");
-        appAnchor.href = joinPaths(appList[i].path, appData.entrypoint);
+        appAnchor.href = joinPaths("file:///mnt/us/apps/" + parsedManifests[i].id, parsedManifests[i].entrypoint);
 
         // Create app icon element
         const appImage = document.createElement("img");
-        appImage.src = joinPaths(appList[i].path, appData.icon);
+        appImage.src = joinPaths("file:///mnt/us/apps/" + parsedManifests[i].id, parsedManifests[i].icon);
 
         // Create app title element
         const appName = document.createElement("p");
-        appName.innerText = appData.name;
+        appName.innerText = parsedManifests[i].name;
 
         // Add all the elements together
         appAnchor.appendChild(appImage);
@@ -88,7 +93,7 @@ function generateTable(appList, columns) {
       }
       catch (error) {
         // Send error to log
-        log("APP ERROR [" + appList[i].name + "]" + error.toString());
+        log("APP ERROR [" + parsedManifests[i].name + "]" + error.toString());
       }
     }
 
