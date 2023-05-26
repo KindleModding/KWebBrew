@@ -20,13 +20,16 @@ table {
   border-style: solid;
   border-width: 1px;
   border-spacing: 0;
+  width: 850px;
+  height: 850px;
+  float: center;
 }
 
 #chessBoard td {
-  font-size: 2em;
+  font-size: 50px;
   text-align: center;
-  height: 2.5em;
-  width: 2.5em;
+  height: 80px;
+  width: 80px;
   text-anchor: middle;
   vertical-align: middle;
 }
