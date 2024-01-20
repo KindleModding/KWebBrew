@@ -19,8 +19,8 @@ The KWebBrew Launcher also comes with a few applications of its own, such as a r
 Lastly, the KWebBrew Launcher also comes with an API which other applications can use to read local files/directories as well as a polyfill including most standard ES6 features (see [Limitations](https://github.com/KWebBrew/KWebBrew/#Limitations))
 
 ## Compatability
-Last Tested on Kindle Firmware: 5.15.1.1<br/>
-Should work an all previous and future firmware versions
+KWebBrew works on firmwares <=5.16.3
+It won't work on firmwares starting 5.16.4 because of the new Chromium browser that doesn't support the file:/// protocol.
 
 ## Installation
 1. Download the [latest release](https://github.com/KWebBrew/KWebBrew/releases/latest) `KWebBrew.zip` file
